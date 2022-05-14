@@ -31,6 +31,16 @@ export default function Item({ item, onUpdate, onDelete }) {
   } else {
     content = (
       <>
+        <p style={{ textDecoration: item.bought ? 'line-through' : null }}>
+          {item.name}
+        </p>
+        <button
+          type='button'
+          aria-label={`Edit ${item.name}`}
+          onClick={() => setIsEditing(true)}
+        >
+          Edit
+        </button>
       </>
     )
   }
