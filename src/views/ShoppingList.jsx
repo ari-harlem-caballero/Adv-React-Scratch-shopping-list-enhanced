@@ -6,7 +6,12 @@ const initialItems = [
 ];
 
 const listReducer = (state, action) => {
-
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return [{ name: action.payload.name, bought: false}, ...state];
+    default:
+      throw new Error(`Action type ${action.type} is not supported`);
+  }
 };
 
 export default function ShoppingList() {
@@ -33,8 +38,13 @@ export default function ShoppingList() {
         />
         <button>Add item</button>
       </form>
+      <ul>
+        {items.map((item) => {
+          <li key={item.id}>
+            {item.name}
+          </li>
+        })}
+      </ul>
     </>
-  )
-  // form/input
-  // map items
+  );
 }
