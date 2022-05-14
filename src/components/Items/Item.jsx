@@ -46,7 +46,26 @@ export default function Item({ item, onUpdate, onDelete }) {
   }
 
   return (
-    <div>Item</div>
+    <div>
+      <input 
+        type='checkbox'
+        checked={item.bought}
+        onChange={(e) => {
+          onUpdate({
+            ...item,
+            bought: e.target.checked
+          })
+        }}
+      />
+      {content}
+      <button
+        type='button'
+        aria-label={`Delete ${item.name}`}
+        onClick={() => onDelete(item.id)}
+      >
+        Delete
+      </button>
+    </div>
   )
   // editing: form/input/button
   // non-edit: checkbox, line-thru
