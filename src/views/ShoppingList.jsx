@@ -8,7 +8,7 @@ const initialItems = [
 const listReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      return [{ name: action.payload.name, bought: false}, ...state];
+      return [{ id: Date.now(), name: action.payload.name, bought: false}, ...state];
     default:
       throw new Error(`Action type ${action.type} is not supported`);
   }
