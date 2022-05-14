@@ -12,6 +12,20 @@ const listReducer = (state, action) => {
       return [{ id: Date.now(), name: action.payload.name, bought: false}, ...state];
     case 'DELETE_ITEM':
       return state.filter((item) => item.id !== action.payload.id);
+    case 'UPDATE_ITEM':
+      return state.map((item) => {
+        if (item.id === action.payload.item.id) {
+          const { name, bought } = action.payload.item;
+
+          return {
+            ...item,
+            name,
+            bought
+          };
+        }
+
+        return item;
+      });
     default:
       throw new Error(`Action type ${action.type} is not supported`);
   }
@@ -29,6 +43,10 @@ export default function ShoppingList() {
 
   const handleDeleteItem = (id) => {
     dispatch({ type: 'DELETE_ITEM', payload: { id } })
+  }
+
+  const handleUpdateItem = (item) => {
+    dispatch({ type: 'UPDATE_ITEM', payload: { item } });
   }
 
   return (
