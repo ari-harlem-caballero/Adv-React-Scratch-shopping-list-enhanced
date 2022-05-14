@@ -49,6 +49,7 @@ export default function Item({ item, onUpdate, onDelete }) {
     <div>
       <input 
         type='checkbox'
+        aria-label={`${item.name} checkbox`}
         checked={item.bought}
         onChange={(e) => {
           onUpdate({

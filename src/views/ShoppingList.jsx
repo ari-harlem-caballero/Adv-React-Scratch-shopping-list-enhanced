@@ -1,9 +1,9 @@
-import React, { useReducer, useState } from 'react';
+import { useReducer, useState } from 'react';
 import Item from '../components/Items/Item';
 
 const initialItems = [
-  { id: 1, name: 'happiness', bought: false },
-  { id: 2, name: 'meaning to life', bought: false },
+  { id: Date.now(), name: 'happiness', bought: false },
+  { id: Date.now(), name: 'meaning to life', bought: false },
 ];
 
 const listReducer = (state, action) => {
