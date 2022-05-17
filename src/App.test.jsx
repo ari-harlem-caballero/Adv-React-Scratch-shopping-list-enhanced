@@ -1,5 +1,5 @@
 // add, delete, update, display shopping list
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { ListProvider } from './context/ListProvider';
@@ -22,8 +22,25 @@ describe('App', () => {
     expect(item).toBeInTheDocument();
   });
 
-  it.skip('onCLick, should allow user to UPDATE shopping list item', async () => {
+  it('onCLick, should allow user to UPDATE shopping list item', async () => {
+    render(
+      <ListProvider>
+        <App />
+      </ListProvider>
+    );
+    
+    const editButton = screen.getByLabelText('Edit happiness');
+    userEvent.click(editButton);
 
+    const editInput = screen.getByLabelText('Edit field');
+    userEvent.type(editInput, '!!!');
+    
+    const saveButton = screen.getByTitle('Save button');
+    userEvent.click(saveButton);
+
+    // await waitForElementToBeRemoved(screen.getByTitle('Save button'));
+
+    await screen.findByText('happiness!!!');
   });
 
   it.skip('onClick, should allow user to DELETE item', async () => {

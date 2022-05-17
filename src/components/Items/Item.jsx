@@ -23,7 +23,11 @@ export default function Item({ item, onUpdate, onDelete }) {
           }}
           aria-label='Edit field'
         />
-        <button type='submit' aria-label='Save changes'>
+        <button 
+          type='submit'
+          aria-label='Save changes'
+          title='Save button'
+        >
           Save
         </button>
       </form>
@@ -37,6 +41,7 @@ export default function Item({ item, onUpdate, onDelete }) {
         <button
           type='button'
           aria-label={`Edit ${item.name}`}
+          title='Edit button'
           onClick={() => setIsEditing(true)}
         >
           Edit
@@ -62,6 +67,7 @@ export default function Item({ item, onUpdate, onDelete }) {
       <button
         type='button'
         aria-label={`Delete ${item.name}`}
+        title='Delete button'
         onClick={() => onDelete(item.id)}
       >
         Delete
