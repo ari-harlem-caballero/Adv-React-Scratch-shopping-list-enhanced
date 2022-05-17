@@ -9,13 +9,12 @@ export default function ShoppingList() {
   
   function handleSubmit(e) {
     e.preventDefault();
-    handleAddItem(newItem);
+    handleAddItem({ name: newItem });
     setNewItem('');
   }
 
   return (
     <>
-      <h1>Shopping List:</h1>
       <form onSubmit={handleSubmit}>
         <input 
           type='text'

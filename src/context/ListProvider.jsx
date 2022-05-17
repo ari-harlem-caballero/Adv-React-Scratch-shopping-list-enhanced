@@ -39,10 +39,8 @@ const ListContext = createContext();
 export const ListProvider = ({ children }) => {
   const [items, dispatch] = useReducer(listReducer, initialItems);
 
-  const handleAddItem = (e) => {
-    e.preventDefault();
-    dispatch({ type: 'ADD_ITEM', payload: { name: newItem } });
-    setNewItem('');
+  const handleAddItem = (item) => {
+    dispatch({ type: 'ADD_ITEM', payload: item });
   }
 
   const handleDeleteItem = (id) => {
@@ -53,9 +51,16 @@ export const ListProvider = ({ children }) => {
     dispatch({ type: 'UPDATE_ITEM', payload: { item } });
   }
 
+  const totalItems = items.length;
+
   return (
   <ListContext.Provider 
-    value={{items, handleAddItem, handleDeleteItem, handleUpdateItem}} >
+    value={{
+      items, 
+      handleAddItem, 
+      handleDeleteItem, 
+      handleUpdateItem, 
+      totalItems}} >
       {children}
   </ListContext.Provider>
   )
@@ -65,7 +70,7 @@ export const useItems = () => {
   const context = useContext(ListContext);
 
   if (context === undefined)
-    throw new Error('useTodos must be called from within a TodoProvider');
+    throw new Error('useItems must be called from within a TodoProvider');
 
   return context;
 }
