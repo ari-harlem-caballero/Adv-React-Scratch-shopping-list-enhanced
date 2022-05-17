@@ -38,12 +38,19 @@ describe('App', () => {
     const saveButton = screen.getByTitle('Save button');
     userEvent.click(saveButton);
 
-    // await waitForElementToBeRemoved(screen.getByTitle('Save button'));
-
     await screen.findByText('happiness!!!');
   });
 
-  it.skip('onClick, should allow user to DELETE item', async () => {
+  it('onClick, should allow user to DELETE item', async () => {
+    render(
+      <ListProvider>
+        <App />
+      </ListProvider>
+    );
 
+    const deleteHappiness = screen.getByRole('button', { name: 'Delete happiness' });
+    userEvent.click(deleteHappiness);
+
+    expect(screen.queryByText('happiness')).not.toBeInTheDocument();
   });
 });
