@@ -29,6 +29,8 @@ const listReducer = (state, action) => {
 
         return item;
       });
+    case 'DELETE_ALL':
+      return [];
     default:
       throw new Error(`Action type ${action.type} is not supported`);
   }
@@ -51,6 +53,10 @@ export const ListProvider = ({ children }) => {
     dispatch({ type: 'UPDATE_ITEM', payload: { item } });
   }
 
+  const deleteAllItems = () => {
+    dispatch({ type: 'DELETE_ALL' });
+  }
+
   const totalItems = items.length;
 
   return (
@@ -60,6 +66,7 @@ export const ListProvider = ({ children }) => {
       handleAddItem, 
       handleDeleteItem, 
       handleUpdateItem, 
+      deleteAllItems,
       totalItems}} >
       {children}
   </ListContext.Provider>
