@@ -11,6 +11,4 @@ export default function Header() {
       <button onClick={deleteAllItems}>Delete All Items</button>
     </>
   )
-  // total items
-  // clear all items
 }

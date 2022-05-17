@@ -24,7 +24,10 @@ export default function ShoppingList() {
           onChange={(e) => setNewItem(e.target.value)}
           required
         />
-        <button>Add item</button>
+        <button
+          type='submit'
+          title='Add item'
+        >Add item</button>
       </form>
       <ul>
         {items.map((item, i) => (
