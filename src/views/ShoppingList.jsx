@@ -2,11 +2,12 @@ import { useReducer, useState } from 'react';
 import Item from '../components/Items/Item';
 
 const initialItems = [
-  { id: Date.now(), name: 'happiness', bought: false },
-  { id: Date.now(), name: 'meaning to life', bought: false },
+  { id: 1, name: 'happiness', bought: false },
+  { id: 2, name: 'meaning to life', bought: false },
 ];
 
 const listReducer = (state, action) => {
+  console.log(state, action);
   switch (action.type) {
     case 'ADD_ITEM':
       return [{ id: Date.now(), name: action.payload.name, bought: false}, ...state];
@@ -15,12 +16,12 @@ const listReducer = (state, action) => {
     case 'UPDATE_ITEM':
       return state.map((item) => {
         if (item.id === action.payload.item.id) {
-          const { name, bought } = action.payload.item;
+          // const { name, bought } = action.payload.item;
 
           return {
             ...item,
-            name,
-            bought
+            name: action.payload.item.name,
+            bought: action.payload.item.bought
           };
         }
 
@@ -64,15 +65,15 @@ export default function ShoppingList() {
         <button>Add item</button>
       </form>
       <ul>
-        {items.map((item) => {
-          <li key={item.id}>
+        {items.map((item, i) => (
+          <li key={`${item.id} ${i}`}>
             <Item 
               item={item}
               onUpdate={handleUpdateItem}
               onDelete={handleDeleteItem}
             />
           </li>
-        })}
+        ))}
       </ul>
     </>
   );

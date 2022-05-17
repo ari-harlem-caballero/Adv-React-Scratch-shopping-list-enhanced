@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 export default function Item({ item, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
